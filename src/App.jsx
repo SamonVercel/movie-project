@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./Component/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
-import Search from "./Component/Search/Search";
 import Scroll from "./Component/Scroll/Scroll";
-import Fetch from "./Component/Fetch/Fetch";
 function App() {
   const [data, setData] = useState();
 
