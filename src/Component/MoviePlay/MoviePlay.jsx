@@ -12,7 +12,7 @@ const MoviePlay = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:3000/moviedata")
+    fetch("https://movieforkhapi.vercel.app")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -20,8 +20,8 @@ const MoviePlay = () => {
         return response.json();
       })
       .then((data) => {
-        setMovie(data);
-        const detail = data.find((movie) => movie.name === name);
+        setMovie(data.moviedata);
+        const detail = data.moviedata.find((movie) => movie.name === name);
         setMoviededail(detail);
       })
       .catch((error) =>

@@ -13,8 +13,6 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [isGenere, setIsGenere] = useState(false);
   const { user, logged, sigIn, signOut } = useGlobalContext();
-  console.log(user);
-  console.log(logged);
 
   function onToggle() {
     setToggle(!toggle);

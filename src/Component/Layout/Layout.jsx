@@ -26,6 +26,7 @@ const Layout = () => {
             <Route index element={<Home />} />
             <Route path="/movie/page/:pageId" element={<Movie />} />
             <Route path="/movie/playpage/:name" element={<MoviePlay />} />
+            <Route path="/tv-show/playpage/:name" element={<MoviePlay />} />
             <Route path="/celebrities" element={<Celebrities />} />
             <Route path="/tv-show/page/:pageId" element={<TvShow />} />
             <Route path="/dashboard" element={<DashBoard />} />

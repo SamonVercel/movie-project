@@ -41,7 +41,7 @@ const TvShow = () => {
   }
 
   useEffect(() => {
-    fetch("http://localhost:3000/moviedata")
+    fetch("https://movieforkhapi.vercel.app")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,7 +49,9 @@ const TvShow = () => {
         return response.json();
       })
       .then((data) => {
-        const movie = data.filter((mv) => mv.type.includes("tv-show"));
+        const movie = data.moviedata.filter((mv) =>
+          mv.type.includes("tv-show")
+        );
         setTypemovie(movie);
       })
       .catch((error) =>

@@ -12,14 +12,14 @@ const Context = ({ children }) => {
   const [logged, setLogged] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:3000/account")
+    fetch("https://movieforkhapi.vercel.app")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then((data) => setAccount(data))
+      .then((data) => setAccount(data.account))
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",

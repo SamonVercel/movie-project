@@ -16,21 +16,18 @@ const Home = () => {
   }, [movie]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/moviedata")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setMovie(data))
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [movie]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://movieforkhapi.vercel.app");
+        const data = await response.json();
+        setMovie(data.moviedata);
+      } catch (error) {
+        console.error("Error fetching the API:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   function onShowMore() {
     const newSlice = slice + 6;

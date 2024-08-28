@@ -10,14 +10,14 @@ const Search = () => {
   const [searchFiltermovie, setSearchFiltermovie] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/moviedata")
+    fetch("https://movieforkhapi.vercel.app")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then((data) => setMovie(data))
+      .then((data) => setMovie(data.moviedata))
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
