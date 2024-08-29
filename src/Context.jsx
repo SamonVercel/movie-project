@@ -7,9 +7,9 @@ export const useGlobalContext = () => {
 };
 
 const Context = ({ children }) => {
-  const [user, setUser] = useState({ username: "Samon" });
+  const [user, setUser] = useState({});
   const [account, setAccount] = useState([]);
-  const [logged, setLogged] = useState(true);
+  const [logged, setLogged] = useState(false);
   const [moviedata, setMoviedata] = useState([]);
 
   useEffect(() => {
@@ -32,8 +32,24 @@ const Context = ({ children }) => {
       );
   }, [moviedata]); // Empty dependency array to run effect only on mount
 
+  useEffect(() => {}, []);
+
+  useEffect(() => {
+    const value = localStorage.getItem("usernamekey");
+    if (value) {
+      setUser({ username: value });
+      setLogged(true);
+      console.log(value);
+    } else {
+      localStorage.setItem("usernamekey", "");
+      console.log("you logged out");
+    }
+  }, []);
+
   function signOut() {
     setLogged(false);
+    setUser();
+    localStorage.setItem("usernamekey", "");
   }
 
   function setnewuser(username) {
@@ -48,6 +64,7 @@ const Context = ({ children }) => {
     if (userAccount) {
       setLogged(true);
       setUser(userAccount); // Set the full user object
+      localStorage.setItem("usernamekey", userAccount.username);
     } else {
       console.log("Invalid username or password");
     }

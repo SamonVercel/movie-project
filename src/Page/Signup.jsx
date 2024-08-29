@@ -33,6 +33,7 @@ const Signup = () => {
           console.log(response.data); // The newly created account object returned from the server
           account.push(response.data); // Optionally, update your local 'account' array with the new account
           setnewuser(newUser);
+          localStorage.setItem("usernamekey", newUser.username);
           onBlack();
         })
         .catch((error) => {

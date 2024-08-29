@@ -40,7 +40,7 @@ const Navbar = () => {
         <Search />
         <div className="gap-4 items-center text-sm font-bold">
           {logged ? (
-            user.username
+            `@${user.username}`
           ) : (
             <Link
               to={"/login"}
@@ -166,15 +166,6 @@ const Navbar = () => {
               </li>
             </ul>
           </li>
-          <li className=" min-w-full">
-            <NavLink
-              onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
-              to={"/celebrities"}
-            >
-              Celebrities
-            </NavLink>
-          </li>
           <li className="">
             <NavLink
               onClick={onToggle}
@@ -188,7 +179,7 @@ const Navbar = () => {
             {logged ? (
               <div className="flex justify-between min-w-full">
                 <span className="min-w-[100px] block rounded-3xl bg-slate-800 py-2 mt-4 text-center hover:bg-orange-400">
-                  user: {user.username}
+                  @{user.username}
                 </span>
                 <span
                   className="min-w-[100px] block rounded-3xl bg-red-500 py-2 mt-4 text-center hover:bg-orange-400"
