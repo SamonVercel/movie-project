@@ -20,11 +20,12 @@ import DashBoard from "./Page/DashBoard.jsx";
 import Login from "./Page/Login.jsx";
 import Signup from "./Page/Signup.jsx";
 import Layout from "./Layout/Layout.jsx";
+import Error from "./Component/Error/Error.jsx";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<Layout />} errorElement={<Error />}>
         <Route index element={<Home />} />
         <Route path="/movie/page/:pageId" element={<Movie />} />
         <Route path="/movie/playpage/:name" element={<MoviePlay />} />

@@ -65,7 +65,7 @@ const Trending = () => {
                         <h2 className="text-2xl font-bold">{m.name}</h2>
                         <div className="flex gap-4 mt-4">
                           <h3 className="flex gap-1">
-                            <span className="text-lg">
+                            <span className="text-lg text-orange-400">
                               <BsStarFill />
                             </span>
                             {m.rate}
@@ -118,7 +118,9 @@ export const TrendingRight = () => {
               <h2 className="text-lg">{tm.name}</h2>
               <h2 className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
-                  <BsStarFill />
+                  <span className="text-orange-400">
+                    <BsStarFill />
+                  </span>
                   {tm.rate}/10
                 </span>
                 , <span>{tm.runtime}</span>

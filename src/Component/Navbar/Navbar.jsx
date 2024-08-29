@@ -51,7 +51,6 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-
       {/* Menu  */}
       <div
         id="menu"
@@ -84,6 +83,15 @@ const Navbar = () => {
               to={"/movie/page/1"}
             >
               Movie
+            </NavLink>
+          </li>
+          <li className="">
+            <NavLink
+              onClick={onToggle}
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              to={"/tv-show/page/1"}
+            >
+              Tv-Show
             </NavLink>
           </li>
           <li className=" min-w-full relative">
@@ -165,15 +173,6 @@ const Navbar = () => {
               to={"/celebrities"}
             >
               Celebrities
-            </NavLink>
-          </li>
-          <li className="">
-            <NavLink
-              onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
-              to={"/tv-show/page/1"}
-            >
-              Tv-Show
             </NavLink>
           </li>
           <li className="">
