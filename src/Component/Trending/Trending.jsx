@@ -8,31 +8,18 @@ import "../Trending/Trending.css";
 import { BiPlayCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
+import { useGlobalContext } from "../../Context";
 
 const Trending = () => {
-  const [movie, setMovie] = useState([]);
+  const { moviedata } = useGlobalContext();
   const [trend, setTrend] = useState([]);
   const nextRef = useRef(null);
   const preRef = useRef(null);
 
   useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setMovie(data.moviedata))
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-    const newtrend = movie.filter((movie) => movie.trending === true);
+    const newtrend = moviedata.filter((movie) => movie.trending === true);
     setTrend(newtrend);
-  }, [movie]);
+  }, [moviedata]);
 
   return (
     <div>
@@ -107,27 +94,13 @@ const Trending = () => {
 };
 
 export const TrendingRight = () => {
+  const { moviedata } = useGlobalContext();
   const [trend, setTrend] = useState([]);
-  const [movie, setMovie] = useState([]);
 
   useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setMovie(data.moviedata))
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-    const newtrend = movie.filter((movie) => movie.trending === true);
+    const newtrend = moviedata.filter((movie) => movie.trending === true);
     setTrend(newtrend);
-  }, [movie]);
+  }, [moviedata]);
 
   return (
     <>

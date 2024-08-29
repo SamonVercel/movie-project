@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { BsStarFill, BsPlayCircle } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGlobalContext } from "../Context";
 
 const TvShow = () => {
-  const navigate = useNavigate();
+  const { moviedata } = useGlobalContext();
   const [typemovie, setTypemovie] = useState([]);
+  const navigate = useNavigate();
   const [slicemovie, setSlicemovie] = useState([]); // Initialize with the first 10 movies
   const { pageId } = useParams();
   const [page, setPage] = useState(0);
@@ -41,26 +43,9 @@ const TvShow = () => {
   }
 
   useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const movie = data.moviedata.filter((mv) =>
-          mv.type.includes("tv-show")
-        );
-        setTypemovie(movie);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [typemovie]);
+    const movie = moviedata.filter((mv) => mv.type.includes("tv-show"));
+    setTypemovie(movie);
+  }, [moviedata]);
 
   useEffect(() => {
     if (typemovie && typemovie.length > 0) {

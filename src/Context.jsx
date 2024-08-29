@@ -7,9 +7,10 @@ export const useGlobalContext = () => {
 };
 
 const Context = ({ children }) => {
-  const [account, setAccount] = useState([]);
   const [user, setUser] = useState({ username: "Samon" });
+  const [account, setAccount] = useState([]);
   const [logged, setLogged] = useState(true);
+  const [moviedata, setMoviedata] = useState([]);
 
   useEffect(() => {
     fetch("https://movieforkhapi.vercel.app")
@@ -19,14 +20,17 @@ const Context = ({ children }) => {
         }
         return response.json();
       })
-      .then((data) => setAccount(data.account))
+      .then((data) => {
+        setAccount(data.account);
+        setMoviedata(data.moviedata);
+      })
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
           error
         )
       );
-  }, []); // Empty dependency array to run effect only on mount
+  }, [moviedata]); // Empty dependency array to run effect only on mount
 
   function signOut() {
     setLogged(false);
@@ -51,7 +55,7 @@ const Context = ({ children }) => {
 
   return (
     <GlobaleContext.Provider
-      value={{ user, logged, account, signIn, signOut, setnewuser }}
+      value={{ user, logged, account, moviedata, signIn, signOut, setnewuser }}
     >
       {children}
     </GlobaleContext.Provider>

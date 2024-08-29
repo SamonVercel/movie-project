@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Trending, { TrendingRight } from "../Component/Trending/Trending";
 import MovieCard from "../Component/Card/MovieCard";
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { useGlobalContext } from "../Context";
 
 const Home = () => {
-  const [movie, setMovie] = useState([]);
+  const { moviedata } = useGlobalContext();
+  const [movie, setMovie] = useState(moviedata);
   const newmovie = [...movie];
   const [lastesmovie, setLastestmovie] = useState([]);
   const [slice, setSlice] = useState(24);
@@ -13,21 +15,7 @@ const Home = () => {
     const sortedArray = newmovie.sort((a, b) => b.id - a.id);
     setLastestmovie(sortedArray);
     document.title = "Moviesforkh - free movie streaming site online";
-  }, [movie]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://movieforkhapi.vercel.app");
-        const data = await response.json();
-        setMovie(data.moviedata);
-      } catch (error) {
-        console.error("Error fetching the API:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  }, [moviedata]);
 
   function onShowMore() {
     const newSlice = slice + 6;

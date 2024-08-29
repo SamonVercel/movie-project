@@ -1,26 +1,50 @@
-import { useState, useEffect } from "react";
-
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import "./App.css";
-import Navbar from "./Component/Navbar/Navbar";
-import { Outlet } from "react-router-dom";
-import Scroll from "./Component/Scroll/Scroll";
-function App() {
-  const [data, setData] = useState();
+import Home from "./Page/Home.jsx";
+import Movie from "./Page/Movie.jsx";
+import Celebrities from "./Page/Celebrities.jsx";
+import TvShow from "./Page/TvShow.jsx";
+import Genere from "./Page/Genere.jsx";
+import MoviePlay from "./Component/MoviePlay/MoviePlay.jsx";
+import GenereAll from "./Component/GenerePage/GenereAll.jsx";
+import GenereScifi from "./Component/GenerePage/GenereScifi.jsx";
+import GenereCartoon from "./Component/GenerePage/GenereCartoon.jsx";
+import GenereAction from "./Component/GenerePage/GenereAction.jsx";
+import GenereRomance from "./Component/GenerePage/GenereRomance.jsx";
+import DashBoard from "./Page/DashBoard.jsx";
+import Login from "./Page/Login.jsx";
+import Signup from "./Page/Signup.jsx";
+import Layout from "./Layout/Layout.jsx";
 
-  return (
-    <>
-      <Scroll />
-      <header className=" bg-[#020D18] px-2 py-2 bg-opacity-80 backdrop-blur-sm sticky top-0 z-50 w-[99.99%]">
-        <Navbar />
-      </header>
-      <main className={`min-h-[1400px] bg-cover bg-center`}>
-        <Outlet />
-      </main>
-      <footer className="w-full text-lg text-center py-2 bg-slate-800 mt-16">
-        mymovie-project 2024
-      </footer>
-    </>
+function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/movie/page/:pageId" element={<Movie />} />
+        <Route path="/movie/playpage/:name" element={<MoviePlay />} />
+        <Route path="/tv-show/playpage/:name" element={<MoviePlay />} />
+        <Route path="/celebrities" element={<Celebrities />} />
+        <Route path="/tv-show/page/:pageId" element={<TvShow />} />
+        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/genere" element={<Genere />}>
+          <Route index element={<GenereAll />} />
+          <Route path="sci-fi" element={<GenereScifi />} />
+          <Route path="cartoon" element={<GenereCartoon />} />
+          <Route path="action" element={<GenereAction />} />
+          <Route path="romance" element={<GenereRomance />} />
+        </Route>
+      </Route>
+    )
   );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

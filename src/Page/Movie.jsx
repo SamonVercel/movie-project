@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { BsStarFill, BsPlay, BsPlayCircle } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGlobalContext } from "../Context";
 const Movie = () => {
-  const navigate = useNavigate();
+  const { moviedata } = useGlobalContext();
   const [typemovie, setTypemovie] = useState([]);
+  const navigate = useNavigate();
   const [slicemovie, setSlicemovie] = useState([]); // Initialize with the first 10 movies
   const { pageId } = useParams();
   const [page, setPage] = useState(0);
@@ -24,6 +26,11 @@ const Movie = () => {
     } else console.log("You reached the last page");
   }
 
+  useEffect(() => {
+    const movie = moviedata.filter((movie) => movie.type === "movie");
+    setTypemovie(movie);
+  }, [moviedata]);
+
   function onPrevousButton() {
     if (parseInt(pageId) > 1) {
       const newPage = parseInt(pageId) - 1;
@@ -37,26 +44,6 @@ const Movie = () => {
       navigate(`/movie/page/${newPage}`);
     } else console.log("You reached the first page");
   }
-
-  useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const movie = data.moviedata.filter((mv) => mv.type.includes("movie"));
-        setTypemovie(movie);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [typemovie]);
 
   useEffect(() => {
     if (typemovie && typemovie.length > 0) {
