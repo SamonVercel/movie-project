@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import MovieCard from "../Card/MovieCard";
 
-const GenereCartoon = () => {
+const GenereHorror = () => {
   const [allmovie, setAllmovie] = useState([]);
   const [sizex, setSizex] = useState(300);
   let interval;
@@ -34,16 +34,16 @@ const GenereCartoon = () => {
       );
   }, [allmovie]);
 
-  const cartoonFilter = allmovie.filter((movie) =>
-    movie.genere.toLowerCase().includes("cartoon")
+  const scifiFilter = allmovie.filter((movie) =>
+    movie.genere.toLowerCase().includes("horror")
   );
 
   return (
     <>
       <section className="">
-        <h1 className="text-xl px-4 border-l-4">Cartoon</h1>
+        <h1 className="text-xl px-4 border-l-4 border-orange-400">Horror</h1>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-3 mt-4">
-          {cartoonFilter?.slice(0, 12).map((m) => (
+          {scifiFilter?.slice(0, 10).map((m) => (
             <div key={m.id} className="rounded-lg">
               <MovieCard
                 hight={sizex}
@@ -61,4 +61,4 @@ const GenereCartoon = () => {
   );
 };
 
-export default GenereCartoon;
+export default GenereHorror;

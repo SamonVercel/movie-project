@@ -21,6 +21,7 @@ import Signup from "./Page/Signup.jsx";
 import Layout from "./Layout/Layout.jsx";
 import Error from "./Component/Error/Error.jsx";
 import About from "./Page/About.jsx";
+import GenereHorror from "./Component/GenerePage/GenereHorror.jsx";
 
 function App() {
   const router = createBrowserRouter(
@@ -41,6 +42,7 @@ function App() {
           <Route path="cartoon" element={<GenereCartoon />} />
           <Route path="action" element={<GenereAction />} />
           <Route path="romance" element={<GenereRomance />} />
+          <Route path="horror" element={<GenereHorror />} />
         </Route>
       </Route>
     )

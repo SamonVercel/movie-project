@@ -9,6 +9,7 @@ import { BiPlayCircle } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
 import { useGlobalContext } from "../../Context";
+import { FaPlay } from "react-icons/fa";
 
 const Trending = () => {
   const { moviedata } = useGlobalContext();
@@ -114,7 +115,7 @@ export const TrendingRight = () => {
             <div className="col-span-3 md:max-h-44 max-h-52 overflow-y-hidden">
               <img className="w-full" src={tm.img} alt={tm.name} />
             </div>
-            <div className="col-span-8">
+            <div className="col-span-9">
               <h2 className="text-lg">{tm.name}</h2>
               <h2 className="flex items-center gap-1">
                 <span className="flex items-center gap-1">
@@ -126,6 +127,12 @@ export const TrendingRight = () => {
                 , <span>{tm.runtime}</span>
               </h2>
               <p className="text-sm mt-2">{tm.detail.slice(0, 105)} ...</p>
+              <div className="cursor-pointer text-sm w-[150px] px-3 mt-3 flex gap-3 items-center bg-slate-600 rounded-md text-white justify-center h-8">
+                <span className="text-base">
+                  <FaPlay />
+                </span>
+                Watch Now
+              </div>
             </div>
           </Link>
         ))}

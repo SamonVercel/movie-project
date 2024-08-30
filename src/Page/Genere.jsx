@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { IoCaretDownOutline } from "react-icons/io5";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Genere = () => {
   const [listToggle, seListToggle] = useState(false);
@@ -35,49 +35,49 @@ const Genere = () => {
             }`}
           >
             <li>
-              <Link
+              <NavLink
                 onClick={onListToggle}
                 className="py-2 px-2 border-b border-slate-600 border-opacity-40 block"
                 to={"/genere"}
               >
                 All
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={onListToggle}
                 to={"sci-fi"}
-                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block"
+                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block genere"
               >
                 Sci-fi
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={onListToggle}
                 to={"cartoon"}
-                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block"
+                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block genere"
               >
                 Cartoon
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={onListToggle}
                 to={"romance"}
-                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block"
+                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block genere"
               >
                 Romance
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={onListToggle}
                 to={"action"}
-                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block"
+                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block genere"
               >
                 Action
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>

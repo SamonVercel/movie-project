@@ -1,13 +1,15 @@
 import React from "react";
 import logo from "../../assets/Img/logo.png";
 import { Link, NavLink } from "react-router-dom";
-import { BiMenu } from "react-icons/bi";
+import { BiMenu, BiMoviePlay } from "react-icons/bi";
 import "./Navbar.css";
 import { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
 import Search from "../Search/Search";
 import { IoIosArrowDown } from "react-icons/io";
 import { useGlobalContext } from "../../Context";
+import { AiFillHome } from "react-icons/ai";
+import { MdLiveTv } from "react-icons/md";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -70,27 +72,36 @@ const Navbar = () => {
           <li className=" min-w-full">
             <NavLink
               onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block mt-6 hover:bg-slate-800"
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 flex mt-6 hover:bg-slate-800 gap-2"
               to={"/"}
             >
+              <span className="text-xl">
+                <AiFillHome />
+              </span>
               Home
             </NavLink>
           </li>
           <li className=" min-w-full">
             <NavLink
               onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 flex hover:bg-slate-800 gap-2"
               to={"/movie/page/1"}
             >
+              <span className="text-xl">
+                <BiMoviePlay />
+              </span>
               Movie
             </NavLink>
           </li>
           <li className="">
             <NavLink
               onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 flex hover:bg-slate-800 gap-2"
               to={"/tv-show/page/1"}
             >
+              <span className="text-xl">
+                <MdLiveTv />
+              </span>
               Tv-Show
             </NavLink>
           </li>
@@ -111,22 +122,22 @@ const Navbar = () => {
             </NavLink>
             <ul className={` top-8 left-0 ${isGenere ? "block" : "hidden"}`}>
               <li className="">
-                <Link
+                <NavLink
                   className="bg-slate-700 w-full px-2 pl-6 py-2 border-b border-slate-700 bg-opacity-30 hover:bg-slate-600 inline-block"
                   to={"/genere"}
                   onClick={onToggle}
                 >
                   All
-                </Link>
+                </NavLink>
               </li>
               <li className="">
-                <Link
+                <NavLink
                   className="bg-slate-700 w-full px-2 pl-6 py-2 border-b border-slate-700 bg-opacity-30 hover:bg-slate-600 inline-block"
                   to={"/genere/sci-fi"}
                   onClick={onToggle}
                 >
                   Si-fi
-                </Link>
+                </NavLink>
               </li>
               <li className="">
                 <Link
@@ -138,38 +149,38 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="">
-                <Link
+                <NavLink
                   className="bg-slate-700 w-full px-2 pl-6 py-2 border-b border-slate-700 bg-opacity-30 hover:bg-slate-600 inline-block"
                   to={"/genere/romance"}
                   onClick={onToggle}
                 >
                   Romance
-                </Link>
+                </NavLink>
               </li>
               <li className="">
-                <Link
+                <NavLink
                   className="bg-slate-700 w-full px-2 pl-6 py-2 border-b border-slate-700 bg-opacity-30 hover:bg-slate-600 inline-block"
                   to={"/genere/action"}
                   onClick={onToggle}
                 >
                   Action
-                </Link>
+                </NavLink>
               </li>
               <li className="">
-                <Link
+                <NavLink
                   className="bg-slate-700 w-full px-2 pl-6 py-2 border-b border-slate-700 bg-opacity-30 hover:bg-slate-600 inline-block"
                   to={"/genere/horror"}
                   onClick={onToggle}
                 >
                   Horror
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </li>
           <li className="">
             <NavLink
               onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 flex hover:bg-slate-800"
               to={"/about"}
             >
               About us
@@ -178,7 +189,7 @@ const Navbar = () => {
           <li className="">
             <NavLink
               onClick={onToggle}
-              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 flex hover:bg-slate-800"
               to={"/dashboard"}
             >
               Dashboard

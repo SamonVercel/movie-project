@@ -21,7 +21,10 @@
 }
 
 .navlink.active {
-  border-bottom: 2px solid orange;
+  border-bottom: 1px solid orange;
+}
+.genere.active {
+  border-bottom: 1px solid rgb(240, 176, 56);
 }
 
 @media screen and (max-width: 768px) {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Trending, { TrendingRight } from "../Component/Trending/Trending";
 import MovieCard from "../Component/Card/MovieCard";
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight, MdLiveTv } from "react-icons/md";
 import { useGlobalContext } from "../Context";
 import { BsPlayBtnFill, BsPlayCircle } from "react-icons/bs";
 
@@ -10,6 +10,19 @@ const Home = () => {
   const [lastesmovie, setLastestmovie] = useState([]);
   const [slice, setSlice] = useState(24);
   const [type, setType] = useState("");
+  const [sizex, setSizex] = useState(300);
+  let interval;
+
+  useEffect(() => {
+    interval = setInterval(() => {
+      const wx = window.innerWidth;
+      if (wx > 768) {
+        setSizex(370);
+      } else {
+        setSizex(340);
+      }
+    }, 200);
+  }, []);
 
   useEffect(() => {
     fetch("https://movieforkhapi.vercel.app")
@@ -70,26 +83,33 @@ const Home = () => {
       </section>
       <section className="w-full mt-10 px-3">
         <div className="flex gap-3">
-          <h1 className="text-2xl font-semibold" onClick={onAllmovie}>
+          <h1
+            className="text-2xl font-semibold cursor-pointer pl-3 border-l-4 border-orange-400"
+            onClick={onAllmovie}
+          >
             Treding
           </h1>
           <button
             type="button"
-            className="flex gap-1 items-center bg-slate-500 rounded-md px-2 text-white"
+            className={`flex gap-1 text-sm items-center bg-slate-500 rounded-md px-2 ${
+              type == "movie" ? "text-orange-300" : "text-white"
+            }`}
             onClick={onMovie}
           >
-            <span>
+            <span className="text-lg">
               <BsPlayCircle />
             </span>
             Movie
           </button>
           <button
             type="button"
-            className="flex gap-1 items-center bg-slate-500 rounded-md px-2 text-white"
+            className={`flex gap-1 text-sm items-center bg-slate-500 rounded-md px-2 ${
+              type == "tv-show" ? "text-orange-300" : "text-white"
+            }`}
             onClick={onTvshow}
           >
-            <span>
-              <BsPlayCircle />
+            <span className="text-lg">
+              <MdLiveTv />
             </span>
             Tv-Show
           </button>
@@ -99,8 +119,9 @@ const Home = () => {
           {lastesmovie
             .slice(0, slice)
             .map(({ id, name, rate, release, img }) => (
-              <div key={id} className=" max-h-[370px]">
+              <div key={id}>
                 <MovieCard
+                  hight={sizex}
                   name={name}
                   rate={rate}
                   img={img}
