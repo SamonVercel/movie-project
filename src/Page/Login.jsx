@@ -10,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+
   function onSubmit() {
     signIn(username, password);
   }
@@ -21,7 +22,7 @@ const Login = () => {
   }, [logged]);
 
   function onBlack() {
-    navigate(-1);
+    navigate("/");
   }
 
   function onEyesToggle() {

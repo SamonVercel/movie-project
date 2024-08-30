@@ -7,7 +7,6 @@ import {
 import "./App.css";
 import Home from "./Page/Home.jsx";
 import Movie from "./Page/Movie.jsx";
-import Celebrities from "./Page/Celebrities.jsx";
 import TvShow from "./Page/TvShow.jsx";
 import Genere from "./Page/Genere.jsx";
 import MoviePlay from "./Component/MoviePlay/MoviePlay.jsx";
@@ -21,6 +20,7 @@ import Login from "./Page/Login.jsx";
 import Signup from "./Page/Signup.jsx";
 import Layout from "./Layout/Layout.jsx";
 import Error from "./Component/Error/Error.jsx";
+import About from "./Page/About.jsx";
 
 function App() {
   const router = createBrowserRouter(
@@ -30,11 +30,11 @@ function App() {
         <Route path="/movie/page/:pageId" element={<Movie />} />
         <Route path="/movie/playpage/:name" element={<MoviePlay />} />
         <Route path="/tv-show/playpage/:name" element={<MoviePlay />} />
-        <Route path="/celebrities" element={<Celebrities />} />
         <Route path="/tv-show/page/:pageId" element={<TvShow />} />
         <Route path="/dashboard" element={<DashBoard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/about" element={<About />} />
         <Route path="/genere" element={<Genere />}>
           <Route index element={<GenereAll />} />
           <Route path="sci-fi" element={<GenereScifi />} />

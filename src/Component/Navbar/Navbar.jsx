@@ -170,6 +170,15 @@ const Navbar = () => {
             <NavLink
               onClick={onToggle}
               className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
+              to={"/about"}
+            >
+              About us
+            </NavLink>
+          </li>
+          <li className="">
+            <NavLink
+              onClick={onToggle}
+              className="navlink min-w-full border-b border-opacity-50 border-zinc-500 py-3 px-2 inline-block hover:bg-slate-800"
               to={"/dashboard"}
             >
               Dashboard

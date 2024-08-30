@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const GlobaleContext = createContext();
 
@@ -31,8 +32,6 @@ const Context = ({ children }) => {
         )
       );
   }, [moviedata]); // Empty dependency array to run effect only on mount
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     const value = localStorage.getItem("usernamekey");

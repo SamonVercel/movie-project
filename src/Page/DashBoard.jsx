@@ -2,8 +2,13 @@ import React, { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../Context";
 
 const DashBoard = () => {
+  const { user, logged } = useGlobalContext();
+  const location = useLocation();
+  const navigate = useNavigate();
   const [movie, setMovie] = useState([]);
   const [typemovie, setTypemove] = useState([]);
   const [typetvshow, setTypetvshow] = useState([]);
@@ -43,6 +48,12 @@ const DashBoard = () => {
   const [deleteid, setDeleteId] = useState();
   const [updateid, setUpdateId] = useState();
   const [subwarning, setSubwarning] = useState(false);
+
+  useEffect(() => {
+    if (!user || !logged) {
+      navigate("/login");
+    }
+  }, [location, logged]);
 
   // Fetch get data from api
   useEffect(() => {
