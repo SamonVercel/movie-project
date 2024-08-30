@@ -6,10 +6,22 @@ import MovieCard from "../Card/MovieCard";
 
 const MoviePlay = () => {
   const { name } = useParams();
+  let navigate = useNavigate();
   const [movie, setMovie] = useState([]);
   const [moviedetail, setMoviededail] = useState([]);
   const [randommovies, setRandommovies] = useState([]);
-  let navigate = useNavigate();
+  const [sizex, setSizex] = useState(300);
+
+  useEffect(() => {
+    setInterval(() => {
+      const wx = window.innerWidth;
+      if (wx > 768) {
+        setSizex(370);
+      } else {
+        setSizex(340);
+      }
+    }, 200);
+  }, []);
 
   useEffect(() => {
     fetch("https://movieforkhapi.vercel.app")
@@ -127,13 +139,14 @@ const MoviePlay = () => {
           <h2 className="mt-6 text-xl px-4 border-l-4">You might also like</h2>
         </div>
         <section className=" w-full m-auto grid lg:grid-cols-6 grid-cols-2 md:grid-cols-4 mt-4 gap-3">
-          {randommovies.map((rm) => (
-            <div key={rm.id} className="max-h-[370px]">
+          {randommovies.map(({ id, img, name, rate, release }) => (
+            <div key={id} className="max-h-[370px]">
               <MovieCard
-                img={rm.img}
-                name={rm.name}
-                rate={rm.rate}
-                release={rm.release}
+                hight={sizex}
+                img={img}
+                name={name}
+                rate={rate}
+                release={release}
               />
             </div>
           ))}

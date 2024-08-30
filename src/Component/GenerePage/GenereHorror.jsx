@@ -42,7 +42,7 @@ const GenereHorror = () => {
     <>
       <section className="">
         <h1 className="text-xl px-4 border-l-4 border-orange-400">Horror</h1>
-        <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3 gap-3 mt-4">
+        <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 gap-3 mt-4">
           {scifiFilter?.slice(0, 10).map((m) => (
             <div key={m.id} className="rounded-lg">
               <MovieCard
