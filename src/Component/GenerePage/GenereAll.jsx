@@ -5,16 +5,16 @@ import { BsArrowRight } from "react-icons/bs";
 import MovieCard from "../Card/MovieCard";
 import { Link } from "react-router-dom";
 import { FiLoader } from "react-icons/fi";
+import { useGlobalContext } from "../../Context";
 
 const GenereAll = () => {
-  const [allmovie, setAllmovie] = useState([]);
   const [scifiFilter, setScifiFilter] = useState();
   const [cartoonFilter, setCartoonFilter] = useState();
   const [romanceFilter, setRomanceFilter] = useState();
   const [actionFilter, setActionFilter] = useState();
   const [horrorFilter, setHorrorFilter] = useState();
   const [sizex, setSizex] = useState();
-  const [isloading, setIsloading] = useState(false);
+  const { moviedata } = useGlobalContext();
 
   useEffect(() => {
     setInterval(() => {
@@ -28,36 +28,19 @@ const GenereAll = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setAllmovie(data.moviedata);
-        setIsloading(true);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-    const scifiFi = allmovie.filter((cartoon) =>
+    const scifiFi = moviedata.filter((cartoon) =>
       cartoon.genere.toLowerCase().includes("sci-fi")
     );
-    const cartoon = allmovie.filter((cartoon) =>
+    const cartoon = moviedata.filter((cartoon) =>
       cartoon.genere.toLowerCase().includes("cartoon")
     );
-    const romance = allmovie.filter((movie) =>
+    const romance = moviedata.filter((movie) =>
       movie.genere.toLowerCase().includes("romance")
     );
-    const action = allmovie.filter((movie) =>
+    const action = moviedata.filter((movie) =>
       movie.genere.toLowerCase().includes("action")
     );
-    const horror = allmovie.filter((movie) =>
+    const horror = moviedata.filter((movie) =>
       movie.genere.toLowerCase().includes("horror")
     );
     setScifiFilter(scifiFi);
@@ -65,20 +48,11 @@ const GenereAll = () => {
     setRomanceFilter(romance);
     setActionFilter(action);
     setHorrorFilter(horror);
-  }, [allmovie]);
+  }, [moviedata]);
 
   const nextRef = useRef(null);
   const preRef = useRef(null);
 
-  if (!isloading) {
-    return (
-      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
-        <span className="w-26 h-26 flex items-center justify-center animate-spin">
-          <FiLoader />
-        </span>
-      </div>
-    );
-  }
   return (
     <>
       {/* Sci-Fi  */}

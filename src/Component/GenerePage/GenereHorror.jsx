@@ -1,11 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import MovieCard from "../Card/MovieCard";
-import { FiLoader } from "react-icons/fi";
+import { useGlobalContext } from "../../Context";
 
 const GenereHorror = () => {
-  const [allmovie, setAllmovie] = useState([]);
   const [sizex, setSizex] = useState(300);
-  const [isloading, setIsloading] = useState(false);
+  const { moviedata } = useGlobalContext();
 
   useEffect(() => {
     setInterval(() => {
@@ -18,39 +17,9 @@ const GenereHorror = () => {
     }, 200);
   }, []);
 
-  useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setAllmovie(data.moviedata);
-        setIsloading(true);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [allmovie]);
-
-  const horrorFilter = allmovie.filter((movie) =>
+  const horrorFilter = moviedata.filter((movie) =>
     movie.genere.toLowerCase().includes("horror")
   );
-
-  if (!isloading) {
-    return (
-      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
-        <span className="w-26 h-26 flex items-center justify-center animate-spin">
-          <FiLoader />
-        </span>
-      </div>
-    );
-  }
 
   return (
     <>

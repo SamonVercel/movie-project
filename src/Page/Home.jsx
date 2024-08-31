@@ -3,18 +3,17 @@ import Trending, { TrendingRight } from "../Component/Trending/Trending";
 import MovieCard from "../Component/Card/MovieCard";
 import { MdKeyboardDoubleArrowRight, MdLiveTv } from "react-icons/md";
 import { useGlobalContext } from "../Context";
-import { BsPlayBtnFill, BsPlayCircle } from "react-icons/bs";
+import { BsPlayCircle } from "react-icons/bs";
 
 const Home = () => {
-  const [movie, setMovie] = useState([]);
   const [lastesmovie, setLastestmovie] = useState([]);
   const [slice, setSlice] = useState(24);
   const [type, setType] = useState("");
   const [sizex, setSizex] = useState(300);
-  let interval;
+  const { moviedata } = useGlobalContext();
 
   useEffect(() => {
-    interval = setInterval(() => {
+    setInterval(() => {
       const wx = window.innerWidth;
       if (wx > 768) {
         setSizex(370);
@@ -25,33 +24,14 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    fetch("https://movieforkhapi.vercel.app")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setMovie(data.moviedata);
-      })
-      .catch((error) =>
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        )
-      );
-  }, [movie]);
-
-  useEffect(() => {
-    const sortedArray = movie.sort((a, b) => b.id - a.id);
+    const sortedArray = moviedata.sort((a, b) => b.id - a.id);
     setLastestmovie(sortedArray);
     if (type) {
-      const newtype = movie.filter((movie) => movie.type === type);
+      const newtype = moviedata.filter((movie) => movie.type === type);
       setLastestmovie(newtype);
     }
     document.title = "Moviesforkh - free movie streaming site online";
-  }, [movie]);
+  }, [moviedata]);
 
   function onAllmovie() {
     setType("");
