@@ -5,14 +5,28 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../Context";
 
 const Login = () => {
-  const { user, logged, signIn, signOut } = useGlobalContext();
+  const { user, logged, account, signOut, setnewuser } = useGlobalContext();
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+  const [submited, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setSubmitted(false);
+  }, [logged]);
 
   function onSubmit() {
-    signIn(username, password);
+    setSubmitted(true);
+    const userAccount = account.find(
+      (acc) => acc.username === username && acc.password === password
+    );
+    if (userAccount) {
+      setnewuser(userAccount);
+      localStorage.setItem("movieforkhusernamekey", userAccount.username);
+    } else {
+      console.log("Invalid username or password");
+    }
   }
 
   useEffect(() => {
@@ -37,7 +51,14 @@ const Login = () => {
           className="max-w-[500px] bg-zinc-800 rounded-xl px-6 py-10"
         >
           <h1 className="text-center text-3xl font-semibold">Lon in</h1>
-          <div className="max-w-[500px] md:min-w-[400px] mt-8 border-zinc-700 py-2 px-4 rounded-xl border">
+          <span
+            className={`mt-2 inline-block ${
+              submited && !logged ? "text-red-600" : "text-green-600"
+            }`}
+          >
+            {submited && !logged ? "Invalid username or password" : ""}
+          </span>
+          <div className="max-w-[500px] md:min-w-[400px] mt-2 border-zinc-700 py-2 px-4 rounded-xl border">
             <input
               className="w-full focus:bg-transparent bg-transparent focus:outline-none text-lg inputbg"
               type="text"

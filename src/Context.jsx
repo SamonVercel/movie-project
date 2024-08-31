@@ -34,13 +34,13 @@ const Context = ({ children }) => {
   }, [moviedata]); // Empty dependency array to run effect only on mount
 
   useEffect(() => {
-    const value = localStorage.getItem("usernamekey");
+    const value = localStorage.getItem("movieforkhusernamekey");
     if (value) {
       setUser({ username: value });
       setLogged(true);
       console.log(value);
     } else {
-      localStorage.setItem("usernamekey", "");
+      localStorage.setItem("movieforkhusernamekey", "");
       console.log("you logged out");
     }
   }, []);
@@ -48,30 +48,17 @@ const Context = ({ children }) => {
   function signOut() {
     setLogged(false);
     setUser();
-    localStorage.setItem("usernamekey", "");
+    localStorage.setItem("movieforkhusernamekey", "");
   }
 
-  function setnewuser(username) {
-    setUser(username);
+  function setnewuser(newusername) {
+    setUser(newusername);
     setLogged(true);
   }
 
-  const signIn = (username, password) => {
-    const userAccount = account.find(
-      (acc) => acc.username === username && acc.password === password
-    );
-    if (userAccount) {
-      setLogged(true);
-      setUser(userAccount); // Set the full user object
-      localStorage.setItem("usernamekey", userAccount.username);
-    } else {
-      console.log("Invalid username or password");
-    }
-  };
-
   return (
     <GlobaleContext.Provider
-      value={{ user, logged, account, moviedata, signIn, signOut, setnewuser }}
+      value={{ user, logged, account, moviedata, signOut, setnewuser }}
     >
       {children}
     </GlobaleContext.Provider>

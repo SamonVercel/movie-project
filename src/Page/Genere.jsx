@@ -79,6 +79,15 @@ const Genere = () => {
                 Action
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                onClick={onListToggle}
+                to={"horror"}
+                className="py-2 px-2 border-b border-slate-600 border-opacity-40 block genere"
+              >
+                Horror
+              </NavLink>
+            </li>
           </ul>
         </div>
         <section className="mt-14">
