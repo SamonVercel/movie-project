@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const GlobaleContext = createContext();
 
@@ -12,18 +11,19 @@ const Context = ({ children }) => {
   const [account, setAccount] = useState([]);
   const [logged, setLogged] = useState(false);
   const [moviedata, setMoviedata] = useState([]);
+  const [isloading, setIsloading] = useState(true);
 
   useEffect(() => {
     fetch("https://movieforkhapi.vercel.app")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
-        }
-        return response.json();
+        } else return response.json();
       })
       .then((data) => {
         setAccount(data.account);
         setMoviedata(data.moviedata);
+        setIsloading(false);
       })
       .catch((error) =>
         console.error(
@@ -41,7 +41,6 @@ const Context = ({ children }) => {
       console.log(value);
     } else {
       localStorage.setItem("movieforkhusernamekey", "");
-      console.log("you logged out");
     }
   }, []);
 
@@ -58,7 +57,15 @@ const Context = ({ children }) => {
 
   return (
     <GlobaleContext.Provider
-      value={{ user, logged, account, moviedata, signOut, setnewuser }}
+      value={{
+        user,
+        logged,
+        account,
+        moviedata,
+        isloading,
+        signOut,
+        setnewuser,
+      }}
     >
       {children}
     </GlobaleContext.Provider>
