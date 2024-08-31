@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import MovieCard from "../Card/MovieCard";
+import { FiLoader } from "react-icons/fi";
 
 const GenereCartoon = () => {
   const [allmovie, setAllmovie] = useState([]);
   const [sizex, setSizex] = useState(300);
-  let interval;
+  const [isloading, setIsloading] = useState(false);
 
   useEffect(() => {
-    interval = setInterval(() => {
+    setInterval(() => {
       const wx = window.innerWidth;
       if (wx > 768) {
         setSizex(370);
@@ -25,7 +26,10 @@ const GenereCartoon = () => {
         }
         return response.json();
       })
-      .then((data) => setAllmovie(data.moviedata))
+      .then((data) => {
+        setAllmovie(data.moviedata);
+        setIsloading(true);
+      })
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
@@ -37,6 +41,16 @@ const GenereCartoon = () => {
   const cartoonFilter = allmovie.filter((movie) =>
     movie.genere.toLowerCase().includes("cartoon")
   );
+
+  if (!isloading) {
+    return (
+      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
+        <span className="w-26 h-26 flex items-center justify-center animate-spin">
+          <FiLoader />
+        </span>
+      </div>
+    );
+  }
 
   return (
     <>

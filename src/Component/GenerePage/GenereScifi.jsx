@@ -4,10 +4,10 @@ import MovieCard from "../Card/MovieCard";
 const GenereScifi = () => {
   const [allmovie, setAllmovie] = useState([]);
   const [sizex, setSizex] = useState(300);
-  let interval;
+  const [isloading, setIsloading] = useState(false);
 
   useEffect(() => {
-    interval = setInterval(() => {
+    setInterval(() => {
       const wx = window.innerWidth;
       if (wx > 768) {
         setSizex(370);
@@ -25,7 +25,10 @@ const GenereScifi = () => {
         }
         return response.json();
       })
-      .then((data) => setAllmovie(data.moviedata))
+      .then((data) => {
+        setAllmovie(data.moviedata);
+        setIsloading(true);
+      })
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
@@ -37,6 +40,16 @@ const GenereScifi = () => {
   const scifiFilter = allmovie.filter((movie) =>
     movie.genere.toLowerCase().includes("sci-fi")
   );
+
+  if (!isloading) {
+    return (
+      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
+        <span className="w-26 h-26 flex items-center justify-center animate-spin">
+          <FiLoader />
+        </span>
+      </div>
+    );
+  }
 
   return (
     <>

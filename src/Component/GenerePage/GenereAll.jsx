@@ -4,6 +4,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { BsArrowRight } from "react-icons/bs";
 import MovieCard from "../Card/MovieCard";
 import { Link } from "react-router-dom";
+import { FiLoader } from "react-icons/fi";
 
 const GenereAll = () => {
   const [allmovie, setAllmovie] = useState([]);
@@ -13,6 +14,7 @@ const GenereAll = () => {
   const [actionFilter, setActionFilter] = useState();
   const [horrorFilter, setHorrorFilter] = useState();
   const [sizex, setSizex] = useState();
+  const [isloading, setIsloading] = useState(false);
 
   useEffect(() => {
     setInterval(() => {
@@ -33,7 +35,10 @@ const GenereAll = () => {
         }
         return response.json();
       })
-      .then((data) => setAllmovie(data.moviedata))
+      .then((data) => {
+        setAllmovie(data.moviedata);
+        setIsloading(true);
+      })
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
@@ -65,6 +70,15 @@ const GenereAll = () => {
   const nextRef = useRef(null);
   const preRef = useRef(null);
 
+  if (!isloading) {
+    return (
+      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
+        <span className="w-26 h-26 flex items-center justify-center animate-spin">
+          <FiLoader />
+        </span>
+      </div>
+    );
+  }
   return (
     <>
       {/* Sci-Fi  */}

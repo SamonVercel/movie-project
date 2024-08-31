@@ -1,13 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import MovieCard from "../Card/MovieCard";
+import { FiLoader } from "react-icons/fi";
 
 const GenereHorror = () => {
   const [allmovie, setAllmovie] = useState([]);
   const [sizex, setSizex] = useState(300);
-  let interval;
+  const [isloading, setIsloading] = useState(false);
 
   useEffect(() => {
-    interval = setInterval(() => {
+    setInterval(() => {
       const wx = window.innerWidth;
       if (wx > 768) {
         setSizex(370);
@@ -25,7 +26,10 @@ const GenereHorror = () => {
         }
         return response.json();
       })
-      .then((data) => setAllmovie(data.moviedata))
+      .then((data) => {
+        setAllmovie(data.moviedata);
+        setIsloading(true);
+      })
       .catch((error) =>
         console.error(
           "There has been a problem with your fetch operation:",
@@ -34,16 +38,26 @@ const GenereHorror = () => {
       );
   }, [allmovie]);
 
-  const scifiFilter = allmovie.filter((movie) =>
+  const horrorFilter = allmovie.filter((movie) =>
     movie.genere.toLowerCase().includes("horror")
   );
+
+  if (!isloading) {
+    return (
+      <div className="min-h-[90vh] text-4xl flex items-center justify-center">
+        <span className="w-26 h-26 flex items-center justify-center animate-spin">
+          <FiLoader />
+        </span>
+      </div>
+    );
+  }
 
   return (
     <>
       <section className="">
         <h1 className="text-xl px-4 border-l-4 border-orange-400">Horror</h1>
         <div className="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 gap-3 mt-4">
-          {scifiFilter?.slice(0, 10).map((m) => (
+          {horrorFilter?.slice(0, 10).map((m) => (
             <div key={m.id} className="rounded-lg">
               <MovieCard
                 hight={sizex}
