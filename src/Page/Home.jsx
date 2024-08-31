@@ -48,7 +48,6 @@ const Home = () => {
   function onShowMore() {
     const newSlice = slice + 6;
     setSlice(newSlice);
-    console.log(slice);
   }
 
   return (
