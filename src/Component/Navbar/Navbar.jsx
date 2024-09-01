@@ -37,7 +37,11 @@ const Navbar = () => {
             <span className="text-sm md:inline hidden">Browse</span>
           </button>
           <Link to={"/"}>
-            <img className="max-w-[130px]" src={logo} alt="logo" />
+            <img
+              className="md:max-w-[130px] max-w-[100px]"
+              src={logo}
+              alt="logo"
+            />
           </Link>
         </div>
         <div className={`md:flex w-full ${showsearch ? "block" : "hidden"}`}>
