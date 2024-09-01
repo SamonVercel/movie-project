@@ -21,6 +21,7 @@ import Signup from "./Page/Signup.jsx";
 import Layout from "./Layout/Layout.jsx";
 import Error from "./Component/Error/Error.jsx";
 import About from "./Page/About.jsx";
+import Profile from "./Page/Profile.jsx";
 import GenereHorror from "./Component/GenerePage/GenereHorror.jsx";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<About />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/genere" element={<Genere />}>
           <Route index element={<GenereAll />} />
           <Route path="sci-fi" element={<GenereScifi />} />

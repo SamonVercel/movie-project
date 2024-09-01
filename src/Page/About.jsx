@@ -81,7 +81,7 @@ const About = () => {
           </div>
         </section>
         <section className="flex justify-center mt-16">
-          <div>
+          <div className="md:max-w-64 max-w-[70%]">
             <img src={logo} alt="logo" />
           </div>
         </section>

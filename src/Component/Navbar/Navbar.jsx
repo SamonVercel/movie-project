@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../assets/Img/logo.png";
 import { Link, NavLink } from "react-router-dom";
-import { BiMenu, BiMoviePlay } from "react-icons/bi";
+import { BiMenu, BiMoviePlay, BiSearch } from "react-icons/bi";
 import "./Navbar.css";
 import { useState } from "react";
 import { BiArrowBack } from "react-icons/bi";
@@ -15,6 +15,7 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const [isGenere, setIsGenere] = useState(false);
   const { user, logged, sigIn, signOut } = useGlobalContext();
+  const [showsearch, setShowsearch] = useState(true);
 
   function onToggle() {
     setToggle(!toggle);
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex m-auto max-w-[1570px] text-slate-300 justify-between lg:gap-20 h-[70px] items-center">
+      <nav className="flex m-auto max-w-[1570px] text-slate-300 justify-between lg:gap-20 gap-6 h-[70px] items-center">
         <div className="logo-menu flex items-center md:gap-12 gap-6">
           <button
             className="text-2xl items-center flex px-3 h-8 rounded-md bg-slate-500"
@@ -39,10 +40,18 @@ const Navbar = () => {
             <img className="max-w-[130px]" src={logo} alt="logo" />
           </Link>
         </div>
-        <Search />
-        <div className="gap-4 items-center text-sm font-bold">
+        <div className={`md:flex w-full ${showsearch ? "block" : "hidden"}`}>
+          <Search />
+        </div>
+        <div className="gap-6 flex items-center text-sm font-bold">
+          <div
+            className="md:hidden flex text-2xl items-center"
+            onClick={() => setShowsearch(!showsearch)}
+          >
+            <BiSearch />
+          </div>
           {logged ? (
-            `@${user.username}`
+            <Link to="profile">@{user.username}</Link>
           ) : (
             <Link
               to={"/login"}

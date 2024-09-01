@@ -309,7 +309,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <div className="max-w-[1570px] m-auto px-4 overflow-x-auto">
+      <div className="max-w-[1570px] m-auto px-2 overflow-x-auto">
         <div className="flex justify-between items-center">
           <h1 className="text-lg mt-4">Dashboard</h1>
         </div>
@@ -358,7 +358,7 @@ const DashBoard = () => {
         </div>
 
         {/* Render  */}
-        <div className="max-w-[1570px] m-auto px-4 overflow-x-auto">
+        <div className="max-w-[1570px] m-autooverflow-x-auto">
           <div className="mt-4 min-w-[1000px]">
             <div className="grid grid-cols-12 p-2 bg-slate-900">
               <div className="col-span-1 flex items-center">Poster</div>
@@ -397,10 +397,7 @@ const DashBoard = () => {
                 type,
                 trending,
               }) => (
-                <div
-                  key={id}
-                  className="grid grid-cols-12 p-2 bg-slate-900 mt-2"
-                >
+                <div key={id} className="grid grid-cols-12 bg-slate-900 mt-2">
                   <div className="col-span-1 ">
                     <img className="max-w-[70px]" src={img} alt={name} />
                   </div>
